@@ -8,4 +8,4 @@ dependencies:
   - seaborn==0.13.2
   - yfinance==0.2.37
   - openbb[all]==3.2.5
-
+  - python-dotenv==1.0.1
