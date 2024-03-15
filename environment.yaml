@@ -1,0 +1,11 @@
+name: options-orderbook
+channels:
+  - conda-forge
+dependencies:
+  - python==3.10.13
+  - pandas==2.2.1
+  - matplotlib==3.8.3
+  - seaborn==0.13.2
+  - yfinance==0.2.37
+  - openbb[all]==3.2.5
+
