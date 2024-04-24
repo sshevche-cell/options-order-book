@@ -1,10 +1,16 @@
+
+
 import logging
 import azure.functions as func
 from azure.storage.blob import BlobServiceClient
-import openbb
+# from openbb import openbb
 from datetime import datetime
 import io
 import csv
+from dotenv import load_dotenv, find_dotenv
+import os
+
+load_dotenv(find_dotenv())
 
 app = func.FunctionApp()
 
@@ -20,11 +26,11 @@ def timer_trigger(myTimer: func.TimerRequest) -> None:
     msft_price = "101"#openbb.stocks.load("MSFT")
 
     # Create a BlobServiceClient using the connection string
-    blob_service_client = BlobServiceClient.from_connection_string()
+    blob_service_client = BlobServiceClient.from_connection_string(os.getenv('AZURE_BLOB_CONNECTION_STRING'))
     
     # Specify the container and blob names
-    container_name = "0dte-options"
-    blob_name = "msft_price.csv"
+    container_name = "0dte-options-2" # EDIT
+    blob_name = "msft_price.csv" # EDIT
 
     # Get a reference to the container
     container_client = blob_service_client.get_container_client(container_name)
@@ -47,6 +53,7 @@ def timer_trigger(myTimer: func.TimerRequest) -> None:
     # Upload the CSV buffer to the blob
     blob_client.upload_blob(csv_buffer.getvalue(), overwrite=True)
 
-    logging.info(f"Microsoft stock price stored: {msft_price}")
+    logging.info(f"Microsoft stock price stored: {msft_price}") # EDIT
 
     return
+
